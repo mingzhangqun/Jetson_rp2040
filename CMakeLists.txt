@@ -4,9 +4,13 @@ project($Jetson_rp2040)
 
 pico_sdk_init()
 
-add_executable(Jetson_rp2040
-        main.c
-    )
+set(SRC_LIST main.c)
+
+if (RP2040_FACTORY)
+	set(SRC_LIST ${SRC_LIST} bin.c)
+endif()
+
+add_executable(Jetson_rp2040 ${SRC_LIST})
 
 target_link_libraries(Jetson_rp2040
     pico_stdlib
